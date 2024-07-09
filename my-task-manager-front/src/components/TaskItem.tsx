@@ -6,7 +6,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 
 interface TaskItemProps {
   task: {
-    id: number;
+    id: string;
     title: string;
     description: string;
     completed: boolean;
@@ -15,7 +15,7 @@ interface TaskItemProps {
 
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   return (
-    <Card variant="outlined" sx={{ mb: 2, p: 2 }}>
+    <Card variant="outlined" sx={{ mb: 2, p: 2 }} key={task.id}>
       <CardContent>
         <Grid container alignItems="center" spacing={2}>
           <Grid item>

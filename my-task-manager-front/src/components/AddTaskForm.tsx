@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Box } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 import api from '../services/api';
 
 interface AddTaskFormProps {
@@ -9,6 +9,7 @@ interface AddTaskFormProps {
 const AddTaskForm: React.FC<AddTaskFormProps> = ({ onTaskAdded }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -22,9 +23,10 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onTaskAdded }) => {
 
       setTitle('');
       setDescription('');
+      setError('');
       onTaskAdded();
     } catch (error) {
-      console.error('There was an error adding the task!', error);
+      setError('There was an error adding the task. Please try again.');
     }
   };
 
@@ -46,6 +48,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onTaskAdded }) => {
         margin="normal"
         required
       />
+      {error && <Typography color="error">{error}</Typography>}
       <Button type="submit" variant="contained" color="primary">
         Add Task
       </Button>
